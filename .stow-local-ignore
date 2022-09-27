@@ -1,0 +1,6 @@
+/.git
+/.gitignore
+/vim/.vim/pack
+/vim/.vim/viminfo
+/zsh/.config/zsh/.zcompdump
+^/README.*
