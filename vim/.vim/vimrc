@@ -2,7 +2,6 @@ packadd minpac
 call minpac#init()
 call minpac#add('k-takata/minpac', {'type': 'opt'})
 call minpac#add('lifepillar/vim-solarized8', {'type': 'opt'})
-call minpac#add('morhetz/gruvbox', {'type': 'opt'})
 call minpac#add('tpope/vim-sensible')
 call minpac#add('tpope/vim-fugitive')
 call minpac#add('tpope/vim-unimpaired')
@@ -25,7 +24,8 @@ let g:netrw_banner=0
 let g:netrw_winsize=15
 let g:netrw_browse_split=4
 
-let g:airline_theme='bubblegum'
+let g:airline_theme='sol'
+let g:airline_experimental = 1
 
 let g:ale_linters = {
 			\ 'javascript': ['eslint'],
@@ -37,8 +37,8 @@ nmap <silent> [w <Plug>(ale_previous)
 nmap <silent> ]w <Plug>(ale_next)
 nmap <silent> ]W <Plug>(ale_last)
 
-set background=dark
-colorscheme gruvbox
+set background=light
+colorscheme solarized8
 
 set viminfofile=~/.vim/viminfo
 
