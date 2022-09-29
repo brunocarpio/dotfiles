@@ -12,5 +12,5 @@ export ZSH_COMPDUMP="${XDG_CACHE_HOME:-$HOME/.cache}/zsh/zcompdump"
 
 export BAT_THEME='Dracula'
 export LESS='-R'
-export LESSOPEN="| /usr/bin/highlight -O ansi %s 2>/dev/null"
+export LESSOPEN="|pygmentize -g %s"
 export FZF_DEFAULT_COMMAND='rg --files'
