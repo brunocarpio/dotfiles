@@ -1,8 +1,7 @@
+[include]
+	path = ~/.gitconfig-local
 [init]
 	defaultBranch = main
-[user]
-	name = Bruno Carpio
-	email = bcarpio_pe@pm.me
 [core]
 	editor = vim
 	pager = less
