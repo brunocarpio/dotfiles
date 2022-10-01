@@ -18,7 +18,9 @@ alias \
 alias \
 	ka="killall" \
 	g="git" \
+	gk="gitk" \
 	e="$EDITOR" \
 	v="$EDITOR" \
+	gv="gvim" \
 	t="tmux" \
 	p="pacman"
