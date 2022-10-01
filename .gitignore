@@ -1,3 +1,5 @@
 /vim/.vim/pack/
 /vim/.vim/viminfo
+/vim/.vim/.netrwhist
+/git/.config/git/gitk
 /zsh/.config/zsh/.zcompdump
