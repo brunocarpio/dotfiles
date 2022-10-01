@@ -5,7 +5,7 @@
 	email = bcarpio_pe@pm.me
 [core]
 	editor = vim
-	pager = cat
+	pager = less
 [diff]
 	tool = vimdiff
 [includeIf "gitdir:~/work/"]
