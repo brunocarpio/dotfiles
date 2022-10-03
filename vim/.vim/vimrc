@@ -20,9 +20,6 @@ let g:netrw_banner=0
 let g:netrw_winsize=15
 let g:netrw_browse_split=4
 
-let g:airline_theme='sol'
-let g:airline_experimental = 1
-
 let g:ale_linters = {
 			\ 'javascript': ['eslint'],
 			\ 'java': ['javac'],
