@@ -18,6 +18,7 @@ alias \
 alias \
 	ka="killall" \
 	g="git" \
+	gst="git status" \
 	gk="gitk" \
 	e="$EDITOR" \
 	v="$EDITOR" \
