@@ -24,11 +24,23 @@ let g:netrw_banner=0
 let g:netrw_winsize=15
 let g:netrw_browse_split=4
 
-
 let g:lsp_diagnostics_signs_enabled = 1
 let g:lsp_diagnostics_echo_cursor = 1
 let g:lsp_diagnostics_echo_delay = 200
+let g:asyncomplete_auto_popup = 0
 
+imap <c-space> <Plug>(asyncomplete_force_refresh)
+
+function! s:check_back_space() abort
+    let col = col('.') - 1
+    return !col || getline('.')[col - 1]  =~ '\s'
+endfunction
+
+inoremap <silent><expr> <TAB>
+  \ pumvisible() ? "\<C-n>" :
+  \ <SID>check_back_space() ? "\<TAB>" :
+  \ asyncomplete#force_refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
 nnoremap [w <plug>(lsp-previous-diagnostic)
 nnoremap ]w <plug>(lsp-next-diagnostic)
