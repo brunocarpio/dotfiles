@@ -1,6 +1,6 @@
 #!/bin/sh
 
-for command in mount umount pacman updatedb su shutdown poweroff reboot ; do
+for command in mount umount pacman updatedb su shutdown poweroff reboot systemctl; do
 	alias $command="sudo $command"
 done; unset command
 
@@ -24,4 +24,6 @@ alias \
 	v="$EDITOR" \
 	gv="gvim" \
 	t="tmux" \
+	d="docker" \
+	dc="docker-compose" \
 	p="pacman"
