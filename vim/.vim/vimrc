@@ -54,7 +54,7 @@ if executable('typescript-language-server')
 endif
 
 set background=dark
-colorscheme solarized8
+colorscheme default
 
 set viminfofile=~/.vim/viminfo
 

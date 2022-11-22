@@ -1,2 +1,4 @@
 set guifont=Fira\ Code\ 12,Monospace\ 12
 set guiligatures=!\"#$%&()*+-./:<=>?@[]^_{\|~
+set background=dark
+colorscheme solarized8
