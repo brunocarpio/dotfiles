@@ -5,7 +5,6 @@ call minpac#add('lifepillar/vim-solarized8', {'type': 'opt'})
 call minpac#add('tpope/vim-sensible')
 call minpac#add('tpope/vim-fugitive')
 call minpac#add('tpope/vim-unimpaired')
-call minpac#add('tpope/vim-vinegar')
 call minpac#add('tpope/vim-surround')
 call minpac#add('tpope/vim-commentary')
 call minpac#add('tpope/vim-repeat')
@@ -13,48 +12,17 @@ call minpac#add('tpope/vim-sleuth')
 call minpac#add('junegunn/fzf.vim')
 call minpac#add('ap/vim-css-color')
 call minpac#add('sheerun/vim-polyglot')
-call minpac#add('prabirshrestha/vim-lsp')
-call minpac#add('SirVer/ultisnips')
-call minpac#add('jiangmiao/auto-pairs')
+call minpac#add('preservim/nerdtree')
 
 nnoremap <C-p> :<C-u>Files<CR>
 
-let g:netrw_liststyle=3
-let g:netrw_banner=0
-let g:netrw_winsize=15
-let g:netrw_browse_split=4
-
-let g:lsp_diagnostics_signs_enabled = 1
-let g:lsp_diagnostics_echo_cursor = 1
-let g:lsp_diagnostics_echo_delay = 200
-let g:lsp_hover_ui = 'preview'
-let g:lsp_signature_help_enabled = 0
-
-let g:mapleader = ','
+let g:mapleader = '-'
 
 nnoremap <leader>ev :e $MYVIMRC<CR>
 nnoremap <leader>sv :source $MYVIMRC<CR>
 
-nnoremap [w <plug>(lsp-previous-diagnostic)
-nnoremap ]w <plug>(lsp-next-diagnostic)
-nnoremap <leader>gd <plug>(lsp-definition)
-nnoremap <leader>h <plug>(lsp-hover)
-nnoremap <leader>d <plug>(lsp-document-format)
-nnoremap <leader>D <plug>(lsp-document-diagnostics)
-
-autocmd FileType javascript setlocal omnifunc=lsp#complete
-
-if executable('typescript-language-server')
-	au User lsp_setup call lsp#register_server({
-				\ 'name': 'javascript support using typescript-language-server',
-				\ 'cmd': { server_info->[&shell, &shellcmdflag, 'typescript-language-server --stdio']},
-				\ 'root_uri': { server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_directory(lsp#utils#get_buffer_path(), '.git/..'))},
-				\ 'whitelist': ['javascript', 'javascript.jsx', 'javascriptreact']
-				\ })
-endif
-
 set background=dark
-colorscheme default
+colorscheme darkblue
 
 set viminfofile=~/.vim/viminfo
 
