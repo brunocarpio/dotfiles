@@ -9,10 +9,10 @@ call minpac#add('tpope/vim-surround')
 call minpac#add('tpope/vim-commentary')
 call minpac#add('tpope/vim-repeat')
 call minpac#add('tpope/vim-sleuth')
+call minpac#add('tpope/vim-eunuch')
 call minpac#add('junegunn/fzf.vim')
-call minpac#add('ap/vim-css-color')
 call minpac#add('sheerun/vim-polyglot')
-call minpac#add('preservim/nerdtree')
+call minpac#add('prettier/vim-prettier')
 
 command! PackUpdate call minpac#update()
 command! PackClean call minpac#clean()
@@ -25,7 +25,7 @@ nnoremap <leader>ev :e $MYVIMRC<CR>
 nnoremap <leader>sv :source $MYVIMRC<CR>
 
 set background=dark
-colorscheme darkblue
+colorscheme default
 set cursorline
 set omnifunc=syntaxcomplete#Complete
 set viminfofile=~/.vim/viminfo
