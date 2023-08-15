@@ -1,31 +1,22 @@
-packadd minpac
-call minpac#init()
-call minpac#add('k-takata/minpac', {'type': 'opt'})
-call minpac#add('lifepillar/vim-solarized8', {'type': 'opt'})
-call minpac#add('tpope/vim-sensible')
-call minpac#add('tpope/vim-fugitive')
-call minpac#add('tpope/vim-unimpaired')
-call minpac#add('tpope/vim-surround')
-call minpac#add('tpope/vim-commentary')
-call minpac#add('tpope/vim-repeat')
-call minpac#add('tpope/vim-sleuth')
-call minpac#add('tpope/vim-eunuch')
-call minpac#add('junegunn/fzf.vim')
-call minpac#add('sheerun/vim-polyglot')
-call minpac#add('prettier/vim-prettier')
-
-command! PackUpdate call minpac#update()
-command! PackClean call minpac#clean()
-
-nnoremap <C-p> :<C-u>Files<CR>
-
-let g:mapleader = '-'
-
-nnoremap <leader>ev :e $MYVIMRC<CR>
-nnoremap <leader>sv :source $MYVIMRC<CR>
-
-set background=dark
-colorscheme default
-set cursorline
+call plug#begin()
+Plug 'tpope/vim-unimpaired'
+Plug 'tpope/vim-sensible'
+Plug 'tpope/vim-commentary'
+Plug 'preservim/nerdtree', { 'on': 'NERDTreeToggle' }
+" Plugin outside ~/.vim/plugged with post-update hook
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+call plug#end()
+colorscheme desert
+nnoremap <C-p> :<C-u>FZF<CR>
+nnoremap <C-g> :<C-u>NERDTreeToggle<CR>
 set omnifunc=syntaxcomplete#Complete
-set viminfofile=~/.vim/viminfo
+set smarttab
+set shiftwidth=2 tabstop=2 softtabstop=2 expandtab
+set path+=**
+command! MakeTags !ctags -R .
+augroup remember_folds
+  autocmd!
+  autocmd BufWinLeave * mkview
+  autocmd BufWinEnter * silent! loadview
+augroup END
+autocmd! BufWritePost $MYVIMRC source $MYVIMRC | echom "Reloaded $NVIMRC"
