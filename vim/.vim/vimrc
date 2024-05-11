@@ -2,17 +2,23 @@ call plug#begin()
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-fugitive'
 Plug 'preservim/nerdtree', { 'on': 'NERDTreeToggle' }
-" Plugin outside ~/.vim/plugged with post-update hook
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 call plug#end()
-colorscheme desert
+
+colorscheme default
+set background=dark
 nnoremap <C-p> :<C-u>FZF<CR>
 nnoremap <C-g> :<C-u>NERDTreeToggle<CR>
 set omnifunc=syntaxcomplete#Complete
 set smarttab
+set cursorline
+set number
 set shiftwidth=2 tabstop=2 softtabstop=2 expandtab
 set path+=**
+let mapleader = "-"
+nnoremap <leader>ev :edit $MYVIMRC<cr>
 command! MakeTags !ctags -R .
 augroup remember_folds
   autocmd!
