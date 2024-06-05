@@ -1,28 +1,54 @@
 call plug#begin()
-Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-unimpaired'
+Plug 'tpope/vim-surround'
 Plug 'tpope/vim-fugitive'
-Plug 'preservim/nerdtree', { 'on': 'NERDTreeToggle' }
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
 call plug#end()
 
-colorscheme default
-set background=dark
-nnoremap <C-p> :<C-u>FZF<CR>
-nnoremap <C-g> :<C-u>NERDTreeToggle<CR>
-set omnifunc=syntaxcomplete#Complete
-set smarttab
-set cursorline
-set number
-set shiftwidth=2 tabstop=2 softtabstop=2 expandtab
+set nocompatible
+filetype plugin on
+syntax enable
 set path+=**
-let mapleader = "-"
+
+" MAPPINGS
+let mapleader = "-" 
+let maplocalleader = "-" 
+nnoremap <leader>ev :edit $MYVIMRC <bar> :split $MYGVIMRC<cr>
 nnoremap <leader>ev :edit $MYVIMRC<cr>
-command! MakeTags !ctags -R .
-augroup remember_folds
-  autocmd!
-  autocmd BufWinLeave * mkview
-  autocmd BufWinEnter * silent! loadview
+nnoremap <leader>sv :source $MYVIMRC<cr>
+nnoremap <leader>pj :%!python -m json.tool<cr>gg=G
+nnoremap <leader>px :%s/> *</>\r</g<cr>gg=G
+
+" OPTIONS
+colorscheme peachpuff
+set number relativenumber
+set ruler
+set hlsearch incsearch
+set ignorecase smartcase
+set softtabstop=2 tabstop=2 shiftwidth=2 expandtab
+set laststatus=2 showtabline=2
+set smartindent
+set autoindent
+set nowrap
+set cursorline
+set background=light
+set previewpopup=height:10,width:60
+let netrw_winsize=15
+nnoremap <c-g> :Lex<cr>
+set statusline=%<%f\ %h%m%r%{FugitiveStatusline()}%=%-14.(%l,%c%V%)\ %P
+set shortmess-=S
+set cursorcolumn
+set directory=~/vimfiles/swapfiles
+
+augroup text
+  au!
+  autocmd FileType text setlocal textwidth=78
 augroup END
-autocmd! BufWritePost $MYVIMRC source $MYVIMRC | echom "Reloaded $NVIMRC"
+
+nnoremap <c-p> :FZF<CR>
+
+autocmd! BufWritePost ~/.vimrc source $MYVIMRC
