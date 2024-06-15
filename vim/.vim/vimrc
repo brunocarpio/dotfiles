@@ -24,7 +24,7 @@ nnoremap <leader>pj :%!python -m json.tool<cr>gg=G
 nnoremap <leader>px :%s/> *</>\r</g<cr>gg=G
 
 " OPTIONS
-colorscheme peachpuff
+colorscheme slate
 set number relativenumber
 set ruler
 set hlsearch incsearch
@@ -35,7 +35,7 @@ set smartindent
 set autoindent
 set nowrap
 set cursorline
-set background=light
+set background=dark
 set previewpopup=height:10,width:60
 let netrw_winsize=15
 nnoremap <c-g> :Lex<cr>
@@ -43,6 +43,8 @@ set statusline=%<%f\ %h%m%r%{FugitiveStatusline()}%=%-14.(%l,%c%V%)\ %P
 set shortmess-=S
 set cursorcolumn
 set directory=~/vimfiles/swapfiles
+let g:netrw_liststyle = 3
+let g:netrw_banner = 0
 
 augroup text
   au!
