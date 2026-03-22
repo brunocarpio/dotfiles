@@ -12,30 +12,32 @@ Plug 'tpope/vim-obsession'
 Plug 'tpope/vim-sleuth'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-abolish'
-Plug 'brunocarpio/vim-vinegar'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
 Plug 'airblade/vim-gitgutter'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'vim-scripts/ScrollColors'
 Plug 'flazz/vim-colorschemes'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
 call plug#end()
 
-colorscheme garden
-set background=light
+colorscheme gruvbox
+set background=dark
 set mouse=a
 set ignorecase
 set nowrap
 highlight clear signcolumn
-set ts=4 sts=4 sw=4 noexpandtab
+set ts=2 sts=2 sw=2 noexpandtab
+set number
 
 let mapleader = ","
 
-execute "set <M-h>=\eh"
-execute "set <M-j>=\ej"
-execute "set <M-k>=\ek"
-execute "set <M-l>=\el"
+" execute "set <M-h>=\eh"
+" execute "set <M-j>=\ej"
+" execute "set <M-k>=\ek"
+" execute "set <M-l>=\el"
 " Move between windows with Alt-hjkl
 " Normal mode
 nnoremap <M-h> <C-w>h
@@ -56,15 +58,17 @@ vnoremap <M-k> <Esc><C-w>k
 vnoremap <M-l> <Esc><C-w>l
 
 " Terminal mode (send Ctrl-w followed by hjkl)
-tnoremap <M-h> <C-\><C-n><C-w>h
-tnoremap <M-j> <C-\><C-n><C-w>j
-tnoremap <M-k> <C-\><C-n><C-w>k
-tnoremap <M-l> <C-\><C-n><C-w>l
+" tnoremap <M-h> <C-\><C-n><C-w>h
+" tnoremap <M-j> <C-\><C-n><C-w>j
+" tnoremap <M-k> <C-\><C-n><C-w>k
+" tnoremap <M-l> <C-\><C-n><C-w>l
 
 " For escaping terminal mode
 tnoremap <Esc> <C-\><C-n>
 
 nnoremap <C-p> :<C-u>GFiles<CR>
+nnoremap - :<c-u>Explore<cr>
+
 
 " https://raw.githubusercontent.com/neoclide/coc.nvim/master/doc/coc-example-config.vim
 
@@ -134,7 +138,7 @@ function! ShowDocumentation()
 endfunction
 
 " Highlight the symbol and its references when holding the cursor
-" autocmd CursorHold * silent call CocActionAsync('highlight')
+autocmd CursorHold * silent call CocActionAsync('highlight')
 
 " Symbol renaming
 nmap <leader>rn <Plug>(coc-rename)
@@ -227,7 +231,38 @@ nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list
 nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
 
-set tabpanel=%!TabPanel()
-function! TabPanel() abort
-  return printf("(%2d)\n  %%f", g:actual_curtabpage)
+function! Wipeout()
+    " Wipe out all buffers that are NOT currently visible in any window or tab
+    " Preserves the current tab and window layout
+
+    let l:current_tab = tabpagenr()
+    let l:current_win = winnr()
+    let l:visible_buffers = {}
+
+    try
+        " Step 1: Collect all buffer numbers that are currently displayed
+        tabdo windo let l:visible_buffers[winbufnr(0)] = 1
+
+        " Step 2: Get all existing buffers
+        let l:all_buffers = range(1, bufnr('$'))
+
+        " Step 3: Filter out visible ones
+        let l:to_wipe = []
+        for l:buf in l:all_buffers
+            if !has_key(l:visible_buffers, l:buf)
+                call add(l:to_wipe, l:buf)
+            endif
+        endfor
+
+        " Step 4: Wipe them out if any
+        if !empty(l:to_wipe)
+            execute 'bwipeout ' . join(l:to_wipe, ' ')
+        endif
+
+    finally
+        " Always return to original tab and window
+        execute 'tabnext' l:current_tab
+        execute l:current_win . 'wincmd w'
+    endtry
 endfunction
+command! Wipeout call Wipeout()
